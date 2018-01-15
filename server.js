@@ -1,3 +1,4 @@
+// loading modules
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -11,6 +12,8 @@ var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
+
+
 //database setup
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/loginApp',{ useMongoClient: true });
@@ -21,12 +24,18 @@ db.once('open', function() {
 });
 
 
+
+
 // route setup
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+
+
 // Init App
 var app = express();
+
+
 
 // View Engine
 app.set('views', path.join(__dirname, 'views'));
@@ -38,8 +47,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Express Session
 app.use(session({
@@ -70,7 +81,8 @@ app.use(expressValidator({
   }
 }));
 
-// Connect Flash
+
+// Connect Flash for global variables
 app.use(flash());
 
 // Global Vars
@@ -83,13 +95,14 @@ app.use(function (req, res, next) {
 });
 
 
-
+// setting routes
 app.use('/', routes);
 app.use('/users', users);
 
 // Set Port
 app.set('port', (process.env.PORT || 3000));
 
+// starting server
 app.listen(app.get('port'), function(){
 	console.log('Server started on port '+app.get('port'));
 });

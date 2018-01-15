@@ -14,18 +14,22 @@
       <div class="header clearfix" style="background-color: rgba(0,125,0,.2);border-radius: 10px;">
         <nav>
           <ul class="nav nav-pills float-right">
+            {{#if user}}
             <li class="nav-item">
               <a class="nav-link" href="/">Dashboard <span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/users/logout">Log out</a>
+            </li>
+            {{else}}
             <li class="nav-item">
               <a class="nav-link" href="/users/login">Login</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/users/register">Register</a>
             </li> 
-            <li class="nav-item">
-              <a class="nav-link" href="/users/logout">Log out</a>
-            </li>
+            {{/if}}
+            
           </ul>
         </nav>
         <h3 class="text-muted" style="margin-left: 10px">Login App</h3>
